@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b7199e6cf4c3f1e4ba86add4465419bb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - enemy: {instanceID: 0}
+  - cardPrefab: {instanceID: 0}
+  - canvas: {instanceID: 0}
+  - effectFromLeftPrefab: {fileID: 7333611213424855774, guid: 276721f085becea49badcc5d29b2dca4, type: 3}
+  - effectFromRightPrefab: {fileID: 8853168490153088288, guid: 89860c3ca1b69fe4f8a37f315c0429d5, type: 3}
+  - fireballImage: {fileID: 21300000, guid: c5088dfd855b31043a9799862c617629, type: 3}
+  - iceBallImage: {fileID: 21300000, guid: aa04c2aef89b8f6468d93ebdc94c1940, type: 3}
+  - multiFireBall: {instanceID: 0}
+  - multiIceBall: {instanceID: 0}
+  - fireAndIceBall: {fileID: 21300000, guid: 6c77736d1efcc4d4291a115ba8e401a3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
