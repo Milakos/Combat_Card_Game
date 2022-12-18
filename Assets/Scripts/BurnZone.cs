@@ -15,7 +15,8 @@ public class BurnZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         
         if (card != null)
         {
-            GameController.instance.playersHand.BurnCard(card);
+            GameController.instance.playersHand.RemoveCard(card);
+             GameController.instance.NextPlayersTurn();
         }
         else return;
     }

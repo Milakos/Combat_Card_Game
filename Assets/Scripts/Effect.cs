@@ -10,16 +10,39 @@ public class Effect : MonoBehaviour
 
     public void EndTrigger()
     {
-        int damage = sourceCard.cardData.damage;
-        if(!targetPlayer.isPlayer)
+        bool bounce = false;
+
+        if(targetPlayer.hasMirror())
         {
-            if(sourceCard.cardData.damageType == CardData.DamageType.fire && targetPlayer.isFire)
-                damage = damage / 2;
-            if(sourceCard.cardData.damageType == CardData.DamageType.ice && !targetPlayer.isFire)
-                damage = damage / 2;
+            targetPlayer.SetMirror(false);
+            bounce = true;
+            if(targetPlayer.isPlayer)
+            {
+                GameController.instance.CastAttackEffect(sourceCard, GameController.instance.enemy);
+            }
+            else
+            {
+                GameController.instance.CastAttackEffect(sourceCard, GameController.instance.player);
+            }
         }
-        targetPlayer.health -= damage;
-        GameController.instance.isPlayable = true;
+        else
+        {
+            int damage = sourceCard.cardData.damage;
+            if(!targetPlayer.isPlayer)
+            {
+                if(sourceCard.cardData.damageType == CardData.DamageType.fire && targetPlayer.isFire)
+                    damage = damage / 2;
+                if(sourceCard.cardData.damageType == CardData.DamageType.ice && !targetPlayer.isFire)
+                    damage = damage / 2;
+            }
+            targetPlayer.health -= damage;
+            targetPlayer.PlayHitAnim();
+            if(!bounce)
+                GameController.instance.NextPlayersTurn();
+            GameController.instance.UpdateHealths();
+
+            GameController.instance.isPlayable = true;
+        }
         Destroy(gameObject);
     }
 }

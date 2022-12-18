@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Hand
     public Transform[] positions = new Transform[3];
     public string[] animationNames = new string[3];
     public bool isPlayers;
-    public void BurnCard(Card card)
+    public void RemoveCard(Card card)
     {
         for (int i = 0; i < cards.Length; i++)
         {
@@ -29,4 +30,14 @@ public class Hand
             }
         }
     }
+
+    internal void ClearHand()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject.Destroy(cards[i].gameObject);
+            cards[i] = null;
+        }
+    }
+
 }

@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuScene: 0
+  scoreText: {fileID: 1575903481}
+  demonsKilled: {fileID: 1748118296}
 --- !u!4 &178964767
 Transform:
   m_ObjectHideFlags: 0
