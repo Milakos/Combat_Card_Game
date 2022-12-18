@@ -8,6 +8,9 @@ public class Effect : MonoBehaviour
     public Card sourceCard = null;
     public Image effectImage = null;
 
+    public AudioSource ice;
+    public AudioSource fire;
+    public AudioSource boom;
     public void EndTrigger()
     {
         bool bounce = false;
@@ -15,6 +18,7 @@ public class Effect : MonoBehaviour
         if(targetPlayer.hasMirror())
         {
             targetPlayer.SetMirror(false);
+            targetPlayer.PlaySmashSound();
             bounce = true;
             if(targetPlayer.isPlayer)
             {
@@ -37,12 +41,43 @@ public class Effect : MonoBehaviour
             }
             targetPlayer.health -= damage;
             targetPlayer.PlayHitAnim();
+            
+           
+            GameController.instance.UpdateHealths();
+            
+            if(targetPlayer.health<=0)
+            {
+                targetPlayer.health = 0;
+                if(targetPlayer.isPlayer)
+                {
+                    GameController.instance.PlayPlayerDieSound();
+                }
+                else
+                {
+                    GameController.instance.PlayEnemySound();
+                }
+                
+            }
+
             if(!bounce)
                 GameController.instance.NextPlayersTurn();
-            GameController.instance.UpdateHealths();
-
+            
             GameController.instance.isPlayable = true;
         }
         Destroy(gameObject);
     }
+
+    internal void PlayIceSound()
+    {
+        ice.Play();
+    }
+    internal void PlayFireSound()
+    {
+        fire.Play();
+    }
+    internal void PlayBoomSound()
+    {
+        boom.Play();
+    }
+
 }

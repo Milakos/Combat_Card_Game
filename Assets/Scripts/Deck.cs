@@ -75,6 +75,14 @@ public class Deck
         {
             if(hand.cards[h] == null)  
             {
+                if(hand.isPlayers)
+                {
+                    GameController.instance.player.PlayCardSound();
+                }
+                else
+                {
+                    GameController.instance.enemy.PlayCardSound();
+                }
                 hand.cards[h] = CreateNewCard(hand.positions[h].position, hand.animationNames[h]);
                 return;
             }     

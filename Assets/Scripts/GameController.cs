@@ -38,12 +38,16 @@ public class GameController : MonoBehaviour
     public Sprite fireAndIceBall;
     public Sprite fireDemon = null;
     public Sprite iceDemon = null;
+    public Sprite DestructBallImage = null;
     public bool playerTurn = true;
     public TMP_Text turnText;
     public TMP_Text scoretext;
     public int playerScore =0, playerKills =0;
     public Image enemySkipImage;
     [SerializeField] private int mainMenuScene;
+    
+    public AudioSource playerDieAudio;
+    public AudioSource enemyDieAudio;
     private void Awake() 
     {
         instance = this;  
@@ -130,6 +134,7 @@ public class GameController : MonoBehaviour
         if(card.cardData.isMirrorCard)
         {
             usingOnPlayer.SetMirror(true);
+            usingOnPlayer.PlayMirrorSound();
             NextPlayersTurn();
             isPlayable = true;
         }
@@ -138,6 +143,7 @@ public class GameController : MonoBehaviour
             if (card.cardData.isDefenseCard)
             {
                 usingOnPlayer.health += card.cardData.damage;
+                usingOnPlayer.PlayHealSound();
                 if(usingOnPlayer.health > usingOnPlayer.maxHealth)
                 {
                     usingOnPlayer.health = usingOnPlayer.maxHealth;
@@ -199,6 +205,7 @@ public class GameController : MonoBehaviour
                         effect.effectImage.sprite = multiFireBall;
                     else
                         effect.effectImage.sprite = fireballImage;
+                    effect.PlayFireSound();
                 break;
 
                 case CardData.DamageType.ice:
@@ -206,10 +213,17 @@ public class GameController : MonoBehaviour
                         effect.effectImage.sprite = multiIceBall;
                     else
                         effect.effectImage.sprite = iceBallImage;
+                    effect.PlayFireSound();
                 break;
 
                 case CardData.DamageType.Both:
                         effect.effectImage.sprite = fireAndIceBall;
+                        effect.PlayFireSound();
+                        effect.PlayIceSound();
+                break;
+                case CardData.DamageType.Destuct:
+                        effect.effectImage.sprite = DestructBallImage;
+                        effect.PlayBoomSound();
                 break;
             }
         }
@@ -394,4 +408,12 @@ private void UpdateScore()
     scoretext.text = "Demons Killed: "+ playerKills.ToString() + ".  Score: "+ playerScore.ToString();
 }
 
+    internal void PlayPlayerDieSound()
+    {
+        playerDieAudio.Play();
+    }
+    internal void PlayEnemySound()
+    {
+        enemyDieAudio.Play();
+    }
 }

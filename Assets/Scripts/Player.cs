@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IDropHandler
 {
+    public AudioSource deal;
+    public AudioSource mirror;
+    public AudioSource heal;
+    // public AudioSource die;
+    public AudioSource smash;
     public Image playerImage = null;
     public Image mirrorImage = null;
     public Image healthNUmberImage = null;
@@ -58,7 +63,7 @@ public class Player : MonoBehaviour, IDropHandler
         }
         else
         {
-            Debug.LogError("Health is not a valid Number " + health.ToString());
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
     }
 
@@ -84,4 +89,25 @@ public class Player : MonoBehaviour, IDropHandler
             }
         }
     }
+
+    internal void PlayMirrorSound()
+    {
+        mirror.Play();
+    }
+    internal void PlaySmashSound()
+    {
+        smash.Play();
+    }
+    internal void PlayHealSound()
+    {
+        heal.Play();
+    }
+    internal void PlayCardSound()
+    {
+        deal.Play();
+    }
+    // internal void PlayDieSound()
+    // {
+    //     die.Play();
+    // }
 }

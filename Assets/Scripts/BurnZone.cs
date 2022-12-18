@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BurnZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public AudioSource burnAudio = null;
     public bool cardEnterd = false;
     public void OnDrop(PointerEventData eventData)
     {
@@ -15,6 +16,7 @@ public class BurnZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         
         if (card != null)
         {
+            PlayBurnSound();
             GameController.instance.playersHand.RemoveCard(card);
              GameController.instance.NextPlayersTurn();
         }
@@ -32,4 +34,9 @@ public class BurnZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         print("Exit in burnzone");
          cardEnterd = false;
     }
+    internal void PlayBurnSound()
+    {
+        burnAudio.Play();
+    }
+
 }
